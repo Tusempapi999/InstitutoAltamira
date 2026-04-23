@@ -1,0 +1,17 @@
+<?php
+    include('clases/claseUser.php'); // Se incluye el archivo de la clase User
+    $user = new User(); // Se crea una instancia de la clase User
+    if (isset($_POST['matricula']) && isset($_POST['pwd'])) { // Se verifica si se han enviado los datos de matricula y contraseña
+        $matricula = $_POST['matricula']; // Se obtiene el valor de la matricula enviada por el formulario
+        $pwd = $_POST['pwd']; // Se obtiene el valor de la contraseña enviada por el formulario
+        $resultado = $user->iniciar_sesion($matricula, $pwd); // Se llama a la función iniciar_sesion con los datos obtenidos
+        if ($resultado->num_rows > 0) { // Si el resultado tiene más de 0 filas, significa que se encontró un usuario con esa matricula y contraseña
+            echo "Inicio de sesión exitoso" . "<br>"; // Se muestra un mensaje de éxito
+            
+            while ($datos = $resultado->fetch_assoc()) { // Se recorre el resultado para obtener los datos del usuario
+                echo "Bienvenido " . $datos['nombre'] . " tu rol es: " . $datos['rol'] . "<br>"; // Se muestra un mensaje de bienvenida con el nombre y rol del usuario
+            }
+        } else {
+            echo "Matricula o contraseña incorrecta"; // Si no se encontró ningún usuario, se muestra un mensaje de error
+        }
+    }
