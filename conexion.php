@@ -11,7 +11,7 @@
         private function abrir_conexion() { // Función para abrir la conexión a la base de datos
             $this->conexion = new mysqli($this->host, $this->user, $this->password, $this->database); 
             // Se crea la conexión mediante mysqli, se le pasan los parámetros de conexión
-            }
+        }
 
         private function cerrar_conexion() { // Función para cerrar la conexión a la base de datos
             $this->conexion->close(); // close() es un método de mysqli para cerrar la conexión a la base de datos

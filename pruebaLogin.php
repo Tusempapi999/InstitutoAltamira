@@ -9,7 +9,29 @@
             echo "Inicio de sesión exitoso" . "<br>"; // Se muestra un mensaje de éxito
             
             while ($datos = $resultado->fetch_assoc()) { // Se recorre el resultado para obtener los datos del usuario
-                echo "Bienvenido " . $datos['nombre'] . " tu rol es: " . $datos['rol'] . "<br>"; // Se muestra un mensaje de bienvenida con el nombre y rol del usuario
+                ?>
+                <table>
+                <thead>
+                    <tr>
+                        <th>Matricula</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Fecha de nacimiento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $datos['id']; ?></td>
+                        <td><?php echo $datos['nombre']; ?></td>
+                        <td><?php echo $datos['email']; ?></td>
+                        <td><?php echo $datos['rol']; ?></td>
+                        <td><?php echo $datos['fecha_nacimiento']; ?></td>
+                    </tr>
+                </tbody> 
+                </table>
+                
+                <?php
             }
         } else {
             echo "Matricula o contraseña incorrecta"; // Si no se encontró ningún usuario, se muestra un mensaje de error
