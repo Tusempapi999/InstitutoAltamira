@@ -7,6 +7,12 @@
         $resultado = $user->iniciar_sesion($matricula, $pwd); // Se llama a la función iniciar_sesion con los datos obtenidos
         if ($resultado->num_rows > 0) { // Si el resultado tiene más de 0 filas, significa que se encontró un usuario con esa matricula y contraseña
             echo "Inicio de sesión exitoso" . "<br>"; // Se muestra un mensaje de éxito
+            if ($matricula == 1) { // Si la matricula es 1 es admin
+                echo "<a href='panelAdmin.html'>Ir al panel de admin</a>";
+            }
+            if ($matricula == 2) { // Si la matricula es 2 es alumno
+                echo "<a href='panelAlumno.html'>Ir al panel de alumno</a>";
+            }
             
             while ($datos = $resultado->fetch_assoc()) { // Se recorre el resultado para obtener los datos del usuario
                 ?>
