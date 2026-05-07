@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS Altamira; -- si existe una base de datos con el mismo no
 CREATE DATABASE Altamira;
 USE Altamira;
 
-CREATE TABLE User (
+CREATE TABLE usuario (
     id INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
@@ -23,22 +23,20 @@ CREATE TABLE User (
 
 CREATE TABLE alumno (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL, 
-    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+    usuario_id INT NOT NULL, 
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE profesor (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    especialidad VARCHAR(100),
-    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE admin (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT NOT NULL,
-    departamento VARCHAR(100),
-    FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE
+    usuario_id INT NOT NULL,
+    FOREIGN KEY (usuario_id) REFERENCES usuario(id) ON DELETE CASCADE
 );
 
 CREATE TABLE justificante (
@@ -138,58 +136,57 @@ CREATE TABLE asistencia_club (
     UNIQUE (alumno_id, fecha) -- Evita pasar lista dos veces al mismo alumno en la misma fecha
 );
 
+DELIMITER //
+
+CREATE TRIGGER insertar_alumno AFTER INSERT ON usuario
+FOR EACH ROW
+BEGIN
+    IF NEW.rol = 'alumno' THEN
+        INSERT INTO alumno (usuario_id) VALUES (NEW.id);
+    END IF;
+END //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER insertar_profesor AFTER INSERT ON usuario
+FOR EACH ROW
+BEGIN
+    IF NEW.rol = 'profesor' THEN
+        INSERT INTO profesor (usuario_id) VALUES (NEW.id);
+    END IF;
+END; //
+
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER insertar_admin AFTER INSERT ON usuario
+FOR EACH ROW
+BEGIN
+    IF NEW.rol = 'admin' THEN
+        INSERT INTO admin (usuario_id) VALUES (NEW.id);
+    END IF;
+END; //
+
+DELIMITER ;
+
 -- Sentencia insert para crear un usuario admin por defecto
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Admin', 'admin@altamira.com', 'admin', 'admin', '2008-11-26');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Admin', 'admin@altamira.com', 'admin', 'admin', '2008-11-26');
 -- Sentencia insert para crear un usuario alumno por defecto
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Alumno', 'alumno@altamira.com', 'alumno', 'alumno', '2007-08-17');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Alumno', 'alumno@altamira.com', 'alumno', 'alumno', '2007-08-17');
 
 -- 1. Usuario profesor
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Carlos Mendoza', 'carlos@altamira.com', 'profesor', 'profesor', '1985-03-10');
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Maria Lopez', 'maria@altamira.com', 'alumno', 'alumno', '2007-05-20');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Carlos Mendoza', 'carlos@altamira.com', 'profesor', 'profesor', '1985-03-10');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Maria Lopez', 'maria@altamira.com', 'alumno', 'alumno', '2007-05-20');
 
--- 3 alumnos mas en user
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Juan Perez', 'juan@altamira.com', 'alumno', 'alumno', '2007-03-15');
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Luis Torres', 'luis@altamira.com', 'alumno', 'alumno', '2007-06-22');
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Ana Ramirez', 'ana@altamira.com', 'alumno', 'alumno', '2007-09-10');
+-- 3 alumnos mas en usuario
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Juan Perez', 'juan@altamira.com', 'alumno', 'alumno', '2007-03-15');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Luis Torres', 'luis@altamira.com', 'alumno', 'alumno', '2007-06-22');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Ana Ramirez', 'ana@altamira.com', 'alumno', 'alumno', '2007-09-10');
 
--- 3 profesores mas en user
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Pedro Gutierrez', 'pedro@altamira.com', 'profesor', 'profesor', '1980-04-12');
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Laura Sanchez', 'laura@altamira.com', 'profesor', 'profesor', '1982-07-18');
-INSERT INTO user (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Roberto Diaz', 'roberto@altamira.com', 'profesor', 'profesor', '1979-11-05');
-
-
--- registrar los 3 profesores en tabla profesor
-INSERT INTO profesor (user_id, especialidad) VALUES (8, 'Historia');
-INSERT INTO profesor (user_id, especialidad) VALUES (9, 'Ciencias');
-INSERT INTO profesor (user_id, especialidad) VALUES (10, 'Español');
-
--- 3 materias mas en asignatura
-INSERT INTO asignatura (nombre, descripcion) VALUES ('Historia', 'Historia universal');
-INSERT INTO asignatura (nombre, descripcion) VALUES ('Ciencias', 'Biologia y quimica');
-INSERT INTO asignatura (nombre, descripcion) VALUES ('Español', 'Gramatica y literatura');
-
--- 3 grupos nuevos uno por materia
-INSERT INTO grupo (asignatura_id, profesor_id, grado, letra_grupo) VALUES (2, 2, '1', 'A');
-INSERT INTO grupo (asignatura_id, profesor_id, grado, letra_grupo) VALUES (3, 3, '1', 'A');
-INSERT INTO grupo (asignatura_id, profesor_id, grado, letra_grupo) VALUES (4, 4, '1', 'A');
-
--- matricular al alumno 1 en los 3 grupos nuevos con calificaciones
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (1, 2, 7.5, 1);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (1, 3, 9.0, 0);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (1, 4, 6.5, 2);
-
--- matricular los 3 alumnos nuevos en todos los grupos
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (3, 1, 8.0, 0);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (3, 2, 7.0, 1);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (3, 3, 9.5, 0);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (3, 4, 8.5, 0);
-
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (4, 1, 6.0, 3);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (4, 2, 8.5, 0);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (4, 3, 7.5, 1);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (4, 4, 9.0, 0);
-
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (5, 1, 9.5, 0);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (5, 2, 6.5, 2);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (5, 3, 8.0, 0);
-INSERT INTO matriculado (alumno_id, grupo_id, calificacion, faltas) VALUES (5, 4, 7.0, 1);
+-- 3 profesores mas en usuario
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Pedro Gutierrez', 'pedro@altamira.com', 'profesor', 'profesor', '1980-04-12');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Laura Sanchez', 'laura@altamira.com', 'profesor', 'profesor', '1982-07-18');
+INSERT INTO usuario (nombre, email, pwd, rol, fecha_nacimiento) VALUES ('Roberto Diaz', 'roberto@altamira.com', 'profesor', 'profesor', '1979-11-05');
