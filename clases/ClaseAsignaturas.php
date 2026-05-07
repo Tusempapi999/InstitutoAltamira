@@ -47,10 +47,22 @@ class Asignatura {
         // Se crea conexión a la base de datos
         $conexion = new Conexion();
 
-        // Sentencia SQL para actualizar datos del registro
-       $conexion->sentencia = "UPDATE asignatura SET nombre = '$nombre', descripcion = '$descripcion'
-        WHERE id = '$id'"; // Se define la sentencia SQL para actualizar el registro con el ID especificado
+        if($nombre != "" && $descripcion != ""){
 
+            // Sentencia SQL para actualizar el nombre y descripción de una asignatura
+            $conexion->sentencia = "UPDATE asignatura SET nombre='$nombre', descripcion='$descripcion' WHERE id='$id'";
+        } else if($nombre != ""){
+
+            // Sentencia SQL para actualizar solo el nombre de una asignatura
+            $conexion->sentencia = "UPDATE asignatura SET nombre='$nombre' WHERE id='$id'";
+        } else if($descripcion != ""){
+
+            // Sentencia SQL para actualizar solo la descripción de una asignatura
+            $conexion->sentencia = "UPDATE asignatura SET descripcion='$descripcion' WHERE id='$id'";
+        } else {
+            // Si no se proporcionó ningún dato para actualizar, retornar false
+            return false;
+        }
         // Ejecuta la actualización y retorna resultado
         return $conexion->ejecutar_sentencia();
     }
