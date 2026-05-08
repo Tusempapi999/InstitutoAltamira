@@ -10,6 +10,7 @@
 
         public function cerrar_sesion() { // Función para cerrar sesión, se destruye la sesión actual
             session_destroy();
+            header("Location: pruebaConsultas.php");
         }
     }
 ?>

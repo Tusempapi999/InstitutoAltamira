@@ -40,3 +40,4 @@
         //Los dos metodos anteriores son iguales, solo que ejecutar_sentencia() solo lo usamos para INSET, UPDATE Y DELETE
         //mientras que obtener_sentencia() solo la usamos para SELECT.
     }
+?>

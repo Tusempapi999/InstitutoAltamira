@@ -30,12 +30,16 @@
     </li>
 </ul>
 
+
+<a href="panelAdmin.php">Ir al apartado usuarios</a>
+
 <?php
 // Incluye el archivo donde está la clase con operaciones CRUD
 include('clases/ClaseAsignaturas.php');
 
 // Crea un objeto para poder usar los métodos de la clase Asignatura
 $asignatura = new Asignatura();
+
 
 // Si se selecciona la opción "alta"
 if (isset($_GET['opcion']) && $_GET['opcion'] == "alta") {
@@ -58,6 +62,7 @@ if (isset($_GET['opcion']) && $_GET['opcion'] == "alta") {
         <!-- Botón para enviar datos al servidor -->
         <input type="submit" name="guardar" value="Guardar">
     </form>
+
 
 <?php
 }
@@ -130,7 +135,7 @@ if(isset($_GET['opcion']) && $_GET['opcion'] == "listar"){
             <th>ID</th> <!-- Encabezado para ID -->
             <th>Nombre</th> <!-- Encabezado para nombre -->
             <th>Descripción</th> <!-- Encabezado para descripción -->
-          </tr>";
+        </tr>";
 
     // Recorre cada fila obtenida de la base de datos
     while($fila = $resultado->fetch_assoc()){
@@ -212,4 +217,4 @@ if(isset($_POST['actualizar'])){
         echo "No se pudo actualizar";
     }
 }
-?>
+

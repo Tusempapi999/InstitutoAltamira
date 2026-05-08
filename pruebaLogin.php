@@ -1,5 +1,5 @@
 <?php
-    include('clases/claseUser.php'); // Se incluye el archivo de la clase User
+    include('claseUser.php'); // Se incluye el archivo de la clase User
     $user = new User(); // Se crea una instancia de la clase User
     if (isset($_POST['matricula']) && isset($_POST['pwd'])) { // Se verifica si se han enviado los datos de matricula y contraseña
         $matricula = $_POST['matricula']; // Se obtiene el valor de la matricula enviada por el formulario
@@ -10,10 +10,15 @@
             while ($datos = $resultado->fetch_assoc()) { // Se recorre el resultado para obtener los datos del usuario
             
                 if ('admin' == $datos['rol']) { // Si la rol es 1 es admin
-                    echo "<a href='panelAdmin.html'>Ir al panel de admin</a>";
+                    header("Location: pruebaAsignaturas.php");
+                    exit();
                 }
                 if ('alumno' == $datos['rol']) { // Si la rol es 2 es alumno
                     echo "<a href='panelAlumno.html'>Ir al panel de alumno</a>";
+                }
+
+                if ('profesor' == $datos['rol']) { // Si la rol es 3 es profesor
+                    echo "<a href='panelProfesor.html'>Ir al panel de profesor</a>";
                 }
             }
 
