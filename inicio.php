@@ -1,3 +1,6 @@
+<?php
+// Esto debe ir SIEMPRE al inicio del archivo
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -6,17 +9,38 @@
     <title>Login</title>
     <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
+
+<style>
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-image: url("fondoinicio.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+</style>
 
 <div class="login-container">
     <div class="login-card">
 
-        <div class="icon">👤</div>
-
         <h2>Welcome back</h2>
         <p class="subtitle">Please sign in to continue</p>
 
-        <!-- ACTION BIEN PUESTO -->
+        <!-- 🔴 NOTIFICACIÓN DE ERROR -->
+        <?php if (isset($_GET['error'])) { ?>
+            <div class="error-msg">
+                ❌ Matrícula o contraseña incorrecta
+            </div>
+        <?php } ?>
+
+        <!-- FORMULARIO -->
         <form action="pruebaLogin.php" method="post">
 
             <div class="input-box">
@@ -30,6 +54,12 @@
             <button type="submit">Sign In</button>
 
         </form>
+
+        <br>
+
+        <a href="so.php">
+            <button type="button">Regresar</button>
+        </a>
 
     </div>
 </div>

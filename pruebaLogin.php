@@ -24,6 +24,8 @@
                     exit;
                     //echo "<a href='panelProfesor.html'>Ir al panel de profesor</a>";
                 }
+               
+
             }
 
             while ($datos = $resultado->fetch_assoc()) { // Se recorre el resultado para obtener los datos del usuario
@@ -51,6 +53,7 @@
                 <?php
             }
         } else {
-            echo "Matricula o contraseña incorrecta"; // Si no se encontró ningún usuario, se muestra un mensaje de error
+           header("Location: inicio.php?error=1");
+            exit;
         }
     }

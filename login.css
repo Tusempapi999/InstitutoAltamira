@@ -101,3 +101,12 @@ button:hover {
     color: #5a6dfc;
     text-decoration: none;
 }
+.error-msg {
+    background: #ffe1e1;
+    color: #b30000;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    text-align: center;
+}

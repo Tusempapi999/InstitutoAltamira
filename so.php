@@ -34,7 +34,7 @@
                 <a href="#eventos" class="link-info">Eventos</a>
 
                 <!-- Enlace que redirige a otra página HTML -->
-                <a href="inicio.html" class="btn">Ingresar</a>
+                <a href="inicio.php" class="btn">Ingresar</a>
             </div>
         </header>
 

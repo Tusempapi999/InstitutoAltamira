@@ -43,7 +43,7 @@
                     </div>        
                     <a href="#">Configuración</a>
                     <a href="#">Ayuda</a>
-                    <a href="pruebaConsultas.html" class="salir">Finalizar sesión</a>
+                    <a href="inicio.php" class="salir">Finalizar sesión</a>
                 </div>
             </div>
 

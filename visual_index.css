@@ -6,7 +6,7 @@
 body {
     margin: 0;
     min-height: 100vh;
-    background-image: url("FondoInicio.png");
+    background-image: url("FondoIndex.png");
     background-size: 1250px 800px;;
     background-position: center;
     background-repeat: no-repeat;
@@ -23,7 +23,7 @@ body {
     width: 100%;
 
     /* Fondo blanco con transparencia */
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: #185abc;
 
     /* Espaciado interno (arriba/abajo - izquierda/derecha) */
     padding: 30px 60px;
@@ -96,7 +96,7 @@ button,
     background-color: #007bff;
 
     /* Color del texto */
-    color: white;
+    color: #ffffff;
 
     /* Bordes redondeados */
     border-radius: 5px;
@@ -116,7 +116,7 @@ button:hover,
 /* Estilo del contenido principal */
 main {
     /* Fondo blanco con ligera transparencia */
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: #185abc;
 
     /* Ancho máximo del contenido */
     max-width: 900px;

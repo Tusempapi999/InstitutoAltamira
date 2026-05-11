@@ -14,12 +14,16 @@
     <aside class="sidebar">
         <div class="logo">
             Colegio<br><span>Nuevo Futuro</span>
+            <br>
         </div>
-
+        ______________________<br>
         <nav class="menu-lateral">
             <a href="">Usuario</a>
+            ______________________<br>
             <a href="-">Asignatura</a>
+            ______________________<br>
             <a href="-">Matricular alumno en asignatura</a>
+            ______________________<br>
         </nav>
     </aside>
 
@@ -43,8 +47,9 @@
                     </div>        
                     <a href="#">Configuración</a>
                     <a href="#">Ayuda</a>
-                    <a href="pruebaConsultas.html" class="salir">Finalizar sesión</a>
+                    <a href="inicio.php" class="salir">Finalizar sesión</a>
                 </div>
+    
             </div>
 
         </header>
