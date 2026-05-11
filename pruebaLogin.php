@@ -10,10 +10,19 @@
             while ($datos = $resultado->fetch_assoc()) { // Se recorre el resultado para obtener los datos del usuario
             
                 if ('admin' == $datos['rol']) { // Si la rol es 1 es admin
-                    echo "<a href='panelAdmin.html'>Ir al panel de admin</a>";
+                    header("Location: panelAdmin.php");
+                    exit;
+                    //echo "<a href='panelAdmin.html'>Ir al panel de admin</a>";
                 }
                 if ('alumno' == $datos['rol']) { // Si la rol es 2 es alumno
-                    echo "<a href='panelAlumno.html'>Ir al panel de alumno</a>";
+                    header("Location: panelAlumno.php");
+                    exit;
+                    //echo "<a href='panelAlumno.html'>Ir al panel de alumno</a>";
+                }
+                if ('profesor' == $datos['rol']) { // Si la rol es 3 es profesor
+                    header("Location: panelProfesor.php");
+                    exit;
+                    //echo "<a href='panelProfesor.html'>Ir al panel de profesor</a>";
                 }
             }
 

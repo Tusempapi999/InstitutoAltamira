@@ -32,25 +32,5 @@
             return $this->obtener_sentencia(); // Se ejecuta la sentencia SQL y se devuelve el resultado
         }
 
-        public function setCalificacion($alumno_id) { // Función para modificar la contraseña de un usuario con una matricula específica
-            $this->sentencia = "SELECT asignatura.nombre AS asignatura, matriculado.calificacion 
-                                FROM matriculado 
-                                INNER JOIN grupo ON matriculado.grupo_id = grupo.id 
-                                INNER JOIN asignatura ON grupo.asignatura_id = asignatura.id 
-                                WHERE matriculado.alumno_id = '$alumno_id'";
-                                // Muestrame el nombre de la asignatura y la calificacion de la tabla matriculado
-                                // uniendo la tabla matriculado con grupo donde el grupo_id de matriculado sea igual al id de grupo
-                                // uniendo la tabla grupo con asignatura donde el asignatura_id de grupo sea igual al id de asignatura
-                                // donde el alumno_id de matriculado sea igual al alumno_id recibido
-                                
-            return $this->obtener_sentencia(); // Se ejecuta la sentencia SQL y se devuelve el resultado
-        }
-
-        public function obtenerAlumnoPorMatricula($matricula) {
-            $this->sentencia = "SELECT id, nombre, email, rol, fecha_nacimiento 
-                                FROM usuario 
-                                WHERE id = '$matricula'";
-            return $this->ejecutar_sentencia()->fetch(PDO::FETCH_ASSOC);
-}
     }
 ?>
