@@ -23,7 +23,7 @@ body {
     width: 100%;
 
     /* Fondo blanco con transparencia */
-    background-color: #185abc;
+    background-color: #ffffff;
 
     /* Espaciado interno (arriba/abajo - izquierda/derecha) */
     padding: 30px 60px;
@@ -93,7 +93,7 @@ button,
     text-decoration: none;
 
     /* Color de fondo */
-    background-color: #007bff;
+    background-color: #0056b3;
 
     /* Color del texto */
     color: #ffffff;
@@ -116,7 +116,7 @@ button:hover,
 /* Estilo del contenido principal */
 main {
     /* Fondo blanco con ligera transparencia */
-    background-color: #185abc;
+    background-color: #ffffff;
 
     /* Ancho máximo del contenido */
     max-width: 900px;
