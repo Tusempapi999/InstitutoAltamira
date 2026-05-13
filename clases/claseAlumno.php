@@ -50,7 +50,7 @@
             $this->sentencia = "SELECT id, nombre, email, rol, fecha_nacimiento 
                                 FROM usuario 
                                 WHERE id = '$matricula'";
-            return $this->ejecutar_sentencia()->fetch(PDO::FETCH_ASSOC);
+            return $this->ejecutar_sentencia()->fetchuytreqw    q(PDO::FETCH_ASSOC);
 }
     }
 ?>
