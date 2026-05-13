@@ -17,7 +17,7 @@
                 if ('alumno' == $datos['rol']) { // Si la rol es 2 es alumno
                     header("Location: panelAlumno.php");
                     exit;
-                    //echo "<a href='panelAlumno.html'>Ir al panel de alumno</a>";
+                    //echo "<a fhref='panelAlumno.html'>Ir al panel de alumno</a>";
                 }
                 if ('profesor' == $datos['rol']) { // Si la rol es 3 es profesor
                     header("Location: panelProfesor.php");
