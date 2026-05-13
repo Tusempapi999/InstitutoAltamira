@@ -31,7 +31,7 @@ body {
     <div class="login-card">
 
         <h2>Welcome back</h2>
-        <p class="subtitle">Please sign in to continue</p>
+        <p class="subtitle">Pleases sihfufgn in to continue</p>
 
         <!-- 🔴 NOTIFICACIÓN DE ERROR -->
         <?php if (isset($_GET['error'])) { ?>
